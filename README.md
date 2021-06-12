@@ -63,6 +63,8 @@ sync.map
 ### Storage
 
 ### Network
+#### DNS
+#### Socket
 
 ### Cryptography
 * Zero-knowledge proof 
