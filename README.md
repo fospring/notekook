@@ -18,6 +18,8 @@ recode some tips in learning
 * Personal project
 
 ## Computer System
+### System call
+### Synchronous between multiple thread
 
 ## Design Pattern
 ### Structural
