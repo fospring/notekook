@@ -10,16 +10,29 @@ recode some tips in learning
     * Cross platform
     * Performance
     * Multithreading
-* Important Data Structure
+    * Life time
+#### Important Data Structure
 * Personal rust project
 ### Golang
 * What's the good points of Golang 
 * Important Data Structure
 * Personal project
+#### Important Data Structure
+sync.map
 
 ## Computer System
 ### System call
 ### Synchronous between multiple thread
+* Optimize of Lock
+    * reduce holding time
+    * optimize lock's granularity
+        * Shrink the critical section
+        * Separate data, such as use sub map in a big map
+    * read/write separate
+        * RWMutex
+        
+    * use atomic types
+        * lock free, no trigger schedule
 
 ## Design Pattern
 ### Structural
