@@ -246,8 +246,51 @@ recode some tips in learning
 ### Consensus
 * POW
 * PBFT
+    * Practical Byzantine Fault Tolerance
+    * [three-phase protocol](http://pmg.csail.mit.edu/papers/osdi99.pdf)
+    * Figure 1展示了非主节点故障的操作。0号是主节点，3号是故障节点，C是客户端。
+    ![pbft-三阶段](./resources/blockchain/consensus/three-phrase.png)
+        * 三阶段消息：pre-prepare、prepare、commit，每个消息都会签名，证明消息的发送者及消息的类型
+        * pre-preparex消息由主节点发出，包括：
+            * 当前请求view：v
+            * 主节点f分配给请求的序号n
+            * 请求的摘要d
+            * 请求本身m
+        * prepare是副本节点收到pre-prepare消息之后，发送给所有副本节
+            * 包括：v,d,n
+            * prepare状态：副本i有pre-prepare消息且收到2f个有效的prepare消息
+        * Commit
+            * 副本i达到prepared状态.可以发送Commit消息，Commit消息的内容和Prepare消息内容相同,但消息类型和签名不同可以加以区分
+            * m可以使用d替代，所以prepare和commit消息使用d代替m，来节省通信量
+    * 三阶段解决的问题
+        * PBFT解决的是拜占庭问题的一致性，即让非拜占庭节点达成一致。更具体的说：让请求m，在view内使用序号n，并且完成执行m，向客户端发送响应
+    * 为什么不能只有前两个阶段的消息
+        * 等价于：为什么pre-prepare和prepare消息，不能让非拜占庭节点达成一致
+        * pre-prepare消息的目的是，主节点为请求m，分配了视图v和序号n，让至少f+1个费拜占庭节点对这个分配组合<m,v,n>达成一致，并且不存在<m',v,n>,即不存在有2个消息使用同一个v和n的情况
+        * prepared状态可以证明费拜占庭节点在只有请求m使用<v,n>上达成一致。主节点本身认可<m,v,n>的，所以副本只需要手机2f个prepare消息，而不是2f+1个prepare消息，就可以计算出至少f个副本是非拜占庭节点，他们认可m使用<v,n>,并且没有另外的消息可使用<v,n>
+        * 既然1个<v,n>只能对应1个请求m，达到prepared状态后，副本i执行请求m，就达成一致了吗？
+            * 并不能。prepared是一个局部视角，不是全局一致，及副本i看到了费拜占庭节点认可了<m,v,n>,但整个系统包含3f+1个节点，异步得系统中，存在丢包、延时、拜占庭节点一股向部分发送prepare等拜占庭消息，副本i无法确定其他副本也达到了prepared状态。如果少于f个副本称为prepared状态，然后执行了请求m，系统就出现了不一致。
+            * 所以前两个阶段的消息，并不能让非拜占庭节点达成一致
+        * 分布式系统同步：
+            第一步只用来锁定资源，第二部才是真正Do Action。把pre-prepare和prepare理解为第一步，资源是<v,n>,只有第一步打不成一致性
+        * 2个不变性
+            * 第一个不变性，由prepare和prepare消息所共同确保的不变性：非拜占庭节点在同一个view内对请求的序号达成共识。
+            * 2个定义：
+                * committed-local：副本i已经是prepared状态，并且收到了2f+1个commit消息
+                * committed：至少f+1个拜占庭节点已经是prepared状态
+                [committed-local](./resources/blockchain/consensus/pbft-committed.png)
+            * 第二个不变性，如果副本i是commited-local，那么一定存在committed
+                * 2f+1个committed消息，去掉最多f个拜占庭节点伪造的消息，得出至少f+1个拜占庭节点发送了commit消息，即至少f+1非拜占庭节点是prepared状态
+    * 为什么3阶段消息可以达成一致性
+        * committed意味着有f+1个费拜占庭节点可以执行请求，而committed-local意味着，副本i看到了有f+1个拜占庭节点可以执行请求，f+1个非拜占庭节点执行请求，就达成了让费拜占庭节点一致
+    * PBFT中节点存在拜占庭节点，主节点并不是可信的，不能依赖主节点统计是否有f+1个费拜占庭节点达成了prepared，而是每个节点各自统计，commited-local让节点看到了，系统一定可以达成一致，采取执行请求
+    * PBFT解决的是在拜占庭环境下，如何提供一致性，以及如何持续的提供一致性的问题
+                
 * POS
 * DPOS
+    * Delegated Proof of Stake
+    * Stake and Voting for “witnesses” and “delegates”
+    * select Some Fixed Num of witnesses to update ledger. 
 ### Contract
 * Wasm
 * Parity
