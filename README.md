@@ -292,9 +292,55 @@ recode some tips in learning
     * Stake and Voting for “witnesses” and “delegates”
     * select Some Fixed Num of witnesses to update ledger. 
 ### Contract
-* Wasm
-* Parity
-* Ink
+#### Wasm
+#### Solidity
+* EVM(Ethereum Virtual Machine)
+    * EVM is the runtime environment for smart contracts in Ethereum.It's not only sandboed but actually completed isolated,which means that code running inside the EVM has no access to network,filesystem or other process.Smart contracts event have limited access to other smart contract.
+* Accounts 
+    * There are two kinds of accounts in Ethereum which share the same address space: 
+        * External accounts: controlled by public-private key pairs
+        * contract accounts
+    * storage: Every account has a persistent key-value store mapping 256-bit words to 256-bit words called storage.
+    * balance: every account has a balance in Ether (in “Wei” to be exact, 1 ether is 10**18 wei) which can be modified by sending transactions that include Ether.
+* Transactions: 
+    * A transaction is a message that is sent from one account to another account (which might be the same or empty, see below). It can include binary data (which is called “payload”) and Ether.
+* Gas:
+    * Upon creation, each transaction is charged with a certain amount of gas, whose purpose is to limit the amount of work that is needed to execute the transaction and to pay for this execution at the same time. 
+* Storage, Memory and the Stack
+    * storage: persistent between function calls and transactions
+    * memory: exist on a function call
+    * stack: The EVM is not a register machine but a stack machine, so all computations are performed on a data area called the stack. It has a maximum size of 1024 elements and contains words of 256 bits.
+* Instruction Set
+* Message Calls
+* Logs
+    * This feature called logs is used by Solidity in order to implement events. 
+* Create
+* Deactivate and Self-destruct
+##### Solidity Compiler
+* Versioning
+* Remix
+    * Online
+* npm/nodejs
+    * solcjs
+    
+* [EIP-20: ERC-20 Token Standard](https://eips.ethereum.org/EIPS/eip-20)
+    * summary: A standard interfaces for tokens
+    * specification: 
+        * Methods:
+            * name
+            * symbol
+            * decimal
+            * totalSupply
+            * balanceOf
+            * transfer
+            * transferFrom
+            * approve
+            * allowance
+        * Events:
+            * Transfer
+            * Approve
+
+#### Ink
 
 ### Virtual Machine
 * EVM
@@ -302,7 +348,6 @@ recode some tips in learning
 
 ### Transaction
 * What is double spending and how to avoid
-* 
 
 ### Storage
 
