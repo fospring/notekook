@@ -12,7 +12,99 @@ recode some tips in learning
     * Multithreading
     * Life time
 #### Important Data Structure
-* Personal rust project
+* Rc
+    * A single-threaded reference-counting pointer.
+    * Declaration
+    ```rust
+  pub struct Rc<T: ?Sized> {
+      ptr: NonNull<RcBox<T>>,
+      phantom: PhantomData<RcBox<T>>,
+  }
+  impl<T: ?Sized> Clone for Rc<T> {
+      #[inline]
+      fn clone(&self) -> Rc<T> {
+          self.inner().inc_strong();
+          Self::from_inner(self.ptr)
+      }
+  }
+  unsafe impl<#[may_dangle] T: ?Sized> Drop for Rc<T> {
+      fn drop(&mut self) {
+          unsafe {
+              self.inner().dec_strong();
+              if self.inner().strong() == 0 {
+                  // destroy the contained object
+                  ptr::drop_in_place(Self::get_mut_unchecked(self));
+  
+                  // remove the implicit "strong weak" pointer now that we've
+                  // destroyed the contents.
+                  self.inner().dec_weak();
+  
+                  if self.inner().weak() == 0 {
+                      Global.deallocate(self.ptr.cast(), Layout::for_value(self.ptr.as_ref()));
+                  }
+              }
+          }
+      }
+  }
+    ```
+* Arc
+* Mutex
+* RwLock
+* oneshot::channel
+* mspc::channel
+* Atomic data types 
+    * 
+
+#### trait
+* std::marker::Send 
+    * Types that can be transferred across thread boundaries.
+    * Declaration
+    ```rust
+  #[stable(feature = "rust1", since = "1.0.0")]
+  #[cfg_attr(not(test), rustc_diagnostic_item = "send_trait")]
+  #[rustc_on_unimplemented(
+      message = "`{Self}` cannot be sent between threads safely",
+      label = "`{Self}` cannot be sent between threads safely"
+  )]
+  pub unsafe auto trait Send {
+      // empty.
+  }  
+  ```
+  * Implement: 
+    * implemented when compiler determines its' appropriated.
+    * non-Send: `Rc` and so on. 
+
+* std::marker::Sync
+    * Types for which it safe to share reference between threads.
+    * Declaration
+    ```rust
+    #[stable(feature = "rust1", since = "1.0.0")]
+    #[cfg_attr(not(test), rustc_diagnostic_item = "sync_trait")]
+    #[lang = "sync"]
+    #[rustc_on_unimplemented(
+        message = "`{Self}` cannot be shared between threads safely",
+        label = "`{Self}` cannot be shared between threads safely"
+    )]
+    pub unsafe auto trait Sync {
+        // FIXME(estebank): once support to add notes in `rustc_on_unimplemented`
+        // lands in beta, and it has been extended to check whether a closure is
+        // anywhere in the requirement chain, extend it as such (#48534):
+        // ```
+        // on(
+        //     closure,
+        //     note="`{Self}` cannot be shared safely, consider marking the closure `move`"
+        // ),
+        // ```
+    
+        // Empty
+    }
+    ```
+    * Implements
+        * This trait is automatically implemented when the compiler determines it’s appropriate.
+        * The precise definition is: a type `T` is `Sync` if and only if `&T` is Send. In Other words,if there is no possibility of undefined behavior(including data races) when passing `&T` references between threads.
+
+#### Personal rust project
+[fospring project](https://github.com/fospring/feature_workspace)
 
 
 ### Golang
