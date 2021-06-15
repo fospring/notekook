@@ -51,7 +51,21 @@ recode some tips in learning
 * Mutex
 * RwLock
 * oneshot::channel
-* mspc::channel
+    * futures::sync::oneshot::channel
+    * Signature
+    ```rust
+  pub fn channel<T>() -> (Sender<T>, Receiver<T>)
+    ```
+    * Two haves are returned
+        * The first of which is a `Sender` handle,used to signal the end of a computation and provide its value.
+        * The second half is a `Receiver` which implements the `Future` trait, resolving to the value that was given to the `Sender` handle.
+        * Each half can be separately owned and sent across threads/tasks.
+* std::sync::mpsc::channel
+    * creates a new asynchronous channel,returning the sender/receiver halves. All data sent on the Sender will become available on the Receiver in the same order as its was sent,and no `send` will block the calling thread(this channel has an "infinite buffer").
+    * `Sender` can be cloned to send to the same channel multiple times,but only one `Receiver` is supported.
+    * `Receiver`
+        * `recv` will block until a message is available.
+        * `try_recv` Attempts to return a pending value on this receiver without blocking.
 * Atomic data types 
     * 
 
