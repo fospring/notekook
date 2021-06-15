@@ -353,7 +353,15 @@ recode some tips in learning
 
 ### Network
 #### DNS
+* Domain Name System
+* DNS is a hierarchical and decentralized naming system for computers, services or other resources, or other resources connected to the Internet or private network.
+* Most prominently, it translates more readily memorized domain names to the numerical IP address needed for locating and identifying computer services and devices with underlying network protocols.
+* The Domain Name System delegates the responsibility of assigning domain names and mapping those names to Internet resources by designating authoritative name servers for each domain.Network administrators may delegate authority over sub-domains of their allocated name space to other name servers.This mechanism provides distributed and fault-tolerant service and was designed to avoid a single large central database.
+
 #### Socket
+* Socket
+* WebSocket
+    * 
 
 ### Cryptography
 * Zero-knowledge proof 
