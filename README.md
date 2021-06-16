@@ -250,11 +250,22 @@ recode some tips in learning
         * lock free, no trigger schedule
 
 ## Design Pattern
-### Structural
+### GoF's Object-oriented programming design patterns
+* Basic principles
+    * Open Closed Principle: software entities(classes,modules,functions,etc) should be open for extension,buts closed for modification.
+    * Liskov Substitution principle(LSP里氏替换原则)：If S is a subtype of T, then objects of type T may be replaced with objects of type S without altering any of the desirable properties of the program
+#### Structural
 * Bridge
 * Facade
-### Behavioral
-* Observer && Visitor 
+#### Behavioral
+* Observer or Publish/subscribe 
+    * Define a one-to-many dependency between objects where a state change in one object results in all its dependents being notified and updated automatically.
+    
+### Concurrent programming design pattern
+#### Producer/Consumer Pattern and Thread Pools
+* The producer/consumer design pattern is a pre-designed solution to separate the two main components by placing a queue in the middle.
+* The producer are responsible for adding to some shared data structure and the consumer are responsible for removing from that structure.
+* Only one party,either a single producer or a single consumer,can access the structure at any given time.
 
 ## Block chain
 ### Consensus
