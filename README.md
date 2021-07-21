@@ -1,25 +1,25 @@
 # notekook
 ## Introduction
 recode some tips in learning
-* [Code Language](#Code Language)
+* [Code Language](#Code-Language)
     * [Rust](#Rust)
     * [Golang](#Golang)
-* [Computer System](#Computer System)
-    * [System call](#System call)
-    * [Synchronous](#Synchronous between multiple thread)
-* [Design Pattern](#Design Pattern)
-    * [Object-oriented programming design patterns](#GoF's Object-oriented programming design patterns)
-    * [Concurrent programming design pattern](#Concurrent programming design pattern)
-* [Block chain](#Block chain)
+* [Computer System](#Computer-System)
+    * [System call](#System-call)
+    * [Synchronous](#Synchronous-between-multiple-thread)
+* [Design Pattern](#Design-Pattern)
+    * [Object-oriented programming design patterns](#GoF's-Object-oriented-programming-design-patterns)
+    * [Concurrent programming design pattern](#Concurrent-programming-design-pattern)
+* [Block chain](#Block-chain)
     * [Consensus](#Consensus)
     * [Contract](#Contract)
-    * [Virtual Machine](#Virtual Machine)
+    * [Virtual Machine](#Virtual-Machine)
     * [Transaction](#Transaction)
     * [Storage](#Storage)
     * [Network](#Network)
     * [Cryptography](#Cryptography)
 * [Database](#Database)
-* [Shell Script](#Shell Script)
+* [Shell Script](#Shell-Script)
 * [Makefile](#Makefile)
 ## Code Language
 ### Rust
@@ -361,7 +361,7 @@ recode some tips in learning
     * This feature called logs is used by Solidity in order to implement events. 
 * Create
 * Deactivate and Self-destruct
-##### Solidity Compiler
+##### Solidity-Compiler
 * Versioning
 * Remix
     * Online
