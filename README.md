@@ -136,7 +136,13 @@ recode some tips in learning
     * Implements
         * This trait is automatically implemented when the compiler determines it’s appropriate.
         * The precise definition is: a type `T` is `Sync` if and only if `&T` is Send. In Other words,if there is no possibility of undefined behavior(including data races) when passing `&T` references between threads.
-
+* std::pin::Pin
+    * A pinned pointer.
+    * preventing the value referenced by that pointer from being moved unless it implements Unpin.
+    * can only move by unsafe rust
+* std::pin::Unpin
+    * Types that can be safely moved after being pinned.
+    * can move by safe rust
 #### Personal rust project
 [fospring project](https://github.com/fospring/feature_workspace)
 
