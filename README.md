@@ -3,6 +3,34 @@
 recode some tips in learning
 * [Code Language](#Code-Language)
     * [Rust](#Rust)
+        * [Types](#Types)
+            * [Rc](#Rc)
+            * [Arc](#Arc)
+            * [Mutex](#Mutex)
+            * [channel](#channel)
+            * [traitObj](#traitObj)
+            * [trait](#trait)
+                * [Send](#Send)
+                * [Sync](#Sync)
+        * [Async rust](#Async-rust)
+            * [Async vs other concurrency models](#Async-vs-other-concurrency-models)
+            * [The State of Async rust](#The-state-of-async-rust)
+            * [Future trait](#Future-trait)
+            * [Task-Waker-Executor](#Task-Waker-Executor)
+            * [Async IO Example](#Async-IO-Example)
+            * [Third part lib](#Third-part-lib)
+                * [tokio](#tokio)
+                * [futures](#futures)
+                * [mio](#mio)
+        * [Error Handle](#Error-Handle)
+            * [backtrace](#std-backtrace)
+            * [anyhow](#anyhow)
+        * [Databases](#Databases)
+            * [diesel](#diesel)
+            * [sqlite](#sqlite)
+            * [sqlx](#sqlx)
+        * [NetWork](#Network)
+        * [Web](#Web)
     * [Golang](#Golang)
 * [Computer System](#Computer-System)
     * [System call](#System-call)
@@ -31,7 +59,8 @@ recode some tips in learning
     * Performance
     * Multithreading
     * Life time
-#### Important Data Structure
+#### Types
+##### Rc
 * Rc
     * A single-threaded reference-counting pointer.
     * Declaration
@@ -67,9 +96,13 @@ recode some tips in learning
       }
   }
     ```
-* Arc
-* Mutex
-* RwLock
+##### Arc
+* A thread-safe reference-counting pointer. ‘Arc’ stands for ‘Atomically Reference Counted’.
+##### Mutex
+* A mutual exclusion primitive useful for protecting shared data
+##### RwLock
+* A reader-writer lock
+##### channel
 * oneshot::channel
     * futures::sync::oneshot::channel
     * Signature
@@ -88,11 +121,27 @@ recode some tips in learning
         * `try_recv` Attempts to return a pending value on this receiver without blocking.
 * Atomic data types 
     * 
+##### traitObj
+* The representation of a trait object like &dyn SomeTrait.
+
+* This struct has the same layout as types like &dyn SomeTrait and Box<dyn AnotherTrait>.
+
+* TraitObject is guaranteed to match layouts, but it is not the type of trait objects (e.g., the fields are not directly accessible on a &dyn SomeTrait) nor does it control that layout (changing the definition will not change the layout of a &dyn SomeTrait). It is only designed to be used by unsafe code that needs to manipulate the low-level details.
+```rust
+#[repr(C)]
+pub struct TraitObject {
+    pub data: *mut (),
+    pub vtable: *mut (),
+}
+```
+* `data` filed is a pointer to an instance of a type T that implements SomeTrait
+*  `vtable` filed a virtual method table, often just called a vtable, which contains, for each method of SomeTrait and its supertraits that T implements, a pointer to T's implementation (i.e. a function pointer).
 
 #### trait
-* std::marker::Send 
-    * Types that can be transferred across thread boundaries.
-    * Declaration
+##### Send
+std::marker::Send 
+* Types that can be transferred across thread boundaries.
+* Declaration
     ```rust
   #[stable(feature = "rust1", since = "1.0.0")]
   #[cfg_attr(not(test), rustc_diagnostic_item = "send_trait")]
@@ -136,13 +185,94 @@ recode some tips in learning
     * Implements
         * This trait is automatically implemented when the compiler determines it’s appropriate.
         * The precise definition is: a type `T` is `Sync` if and only if `&T` is Send. In Other words,if there is no possibility of undefined behavior(including data races) when passing `&T` references between threads.
-* std::pin::Pin
-    * A pinned pointer.
-    * preventing the value referenced by that pointer from being moved unless it implements Unpin.
-    * can only move by unsafe rust
+#### Pin 
+std::pin::Pin
+* A pinned pointer.
+* preventing the value referenced by that pointer from being moved unless it implements Unpin.
+* can only move by unsafe rust
 * std::pin::Unpin
     * Types that can be safely moved after being pinned.
     * can move by safe rust
+### Async-rust
+#### Async vs other concurrency models
+*  In summary, asynchronous programming allows highly performant implementations that are suitable for low-level languages like Rust, while providing most of the ergonomic benefits of threads and coroutines:
+    * **OS** threads don't require any changes to the programming model, which makes it very easy to express concurrency. However, synchronizing between threads can be difficult, and the performance overhead is large. Thread pools can mitigate some of these costs, but not enough to support massive IO-bound workloads.
+    * **Event-driven programming**, in conjunction with callbacks, can be very performant, but tends to result in a verbose, "non-linear" control flow. Data flow and error propagation is often hard to follow.
+    * **Coroutines**, like threads, don't require changes to the programming model, which makes them easy to use. Like async, they can also support a large number of tasks. However, they abstract away low-level details that are important for systems programming and custom runtime implementors.
+    * **The actor model** divides all concurrent computation into units called actors, which communicate through fallible message passing, much like in distributed systems. The actor model can be efficiently implemented, but it leaves many practical issues unanswered, such as flow control and retry logic.
+#### Future trait
+The Future trait is at the center of asynchronous programming in Rust. A Future is an asynchronous computation that can produce a value (although that value may be empty, e.g. ()). A simplified version of the future trait might look something like this:
+```rust
+trait SimpleFuture {
+    type Output;
+    fn poll(&mut self, wake: fn()) -> Poll<Self::Output>;
+}
+
+enum Poll<T> {
+    Ready(T),
+    Pending,
+}
+```
+Futures can be advanced by calling the poll function, which will drive the future as far towards completion as possible. If the future completes, it returns Poll::Ready(result). If the future is not able to complete yet, it returns Poll::Pending and arranges for the wake() function to be called when the Future is ready to make more progress. When wake() is called, the executor driving the Future will call poll again so that the Future can make more progress.
+
+Without wake(), the executor would have no way of knowing when a particular future could make progress, and would have to be constantly polling every future. With wake(), the executor knows exactly which futures are ready to be polled.
+#### Future and task
+It's common that futures aren't able to complete the first time they are polled. When this happens, the future needs to ensure that it is polled again once it is ready to make more progress. This is done with the Waker type.
+
+Each time a future is polled, it is polled as part of a "task". Tasks are the top-level futures that have been submitted to an executor.
+
+Waker provides a wake() method that can be used to tell the executor that the associated task should be awoken. When wake() is called, the executor knows that the task associated with the Waker is ready to make progress, and its future should be polled again.
+
+Waker also implements clone() so that it can be copied around and stored.
+#### Task Waker Executor
+Rust's Futures are lazy: they won't do anything unless actively driven to completion. One way to drive a future to completion is to .await it inside an async function, but that just pushes the problem one level up: who will run the futures returned from the top-level async functions? The answer is that we need a Future executor.
+
+Future executors take a set of top-level Futures and run them to completion by calling poll whenever the Future can make progress. Typically, an executor will poll a future once to start off. When Futures indicate that they are ready to make progress by calling wake(), they are placed back onto a queue and poll is called again, repeating until the Future has completed.
+#### Async IO Example
+#### Third part lib
+##### futures
+[futures](#https://crates.io/crates/futures)
+
+##### tokio
+[tokio](#https://crates.io/crates/tokio)
+A runtime for writing reliable, asynchronous, and slim applications with the Rust programming language. It is:
+
+**Fast**: Tokio's zero-cost abstractions give you bare-metal performance.
+
+**Reliable**: Tokio leverages Rust's ownership, type system, and concurrency model to reduce bugs and ensure thread safety.
+
+**Scalable**: Tokio has a minimal footprint, and handles backpressure and cancellation naturally.
+##### mio
+[mio](#https://crates.io/crates/mio)
+* Mio is a fast, low-level I/O library for Rust focusing on non-blocking APIs and event notification for building high performance I/O apps with as little overhead as possible over the OS abstractions.
+### Error Handle
+#### std backtrace
+[std::backtrace](#https://doc.rust-lang.org/std/backtrace/index.html)
+* Environment Variables
+    * RUST_LIB_BACKTRACE - if this is set to 0 then Backtrace::capture will never capture a backtrace. Any other value this is set to will enable Backtrace::capture.
+    * RUST_BACKTRACE - if RUST_LIB_BACKTRACE is not set, then this variable is consulted with the same rules of RUST_LIB_BACKTRACE.
+    * If neither of the above env vars are set, then Backtrace::capture will be disabled.
+#### anyhow
+This library provides anyhow::Error, a trait object based error type for easy idiomatic error handling in Rust applications.
+* [anyhow](https://crates.io/crates/anyhow)
+### Databases
+#### diesel
+[diesel](https://crates.io/crates/diesel)
+* Diesel is the most productive way to interact with databases in Rust because of its safe and composable abstractions over queries.
+#### sqlite
+[sqlite](https://crates.io/crates/sqlite)
+* The package provides an interface to SQLite.
+#### sqlx
+[sqlx](https://crates.io/crates/sqlx)
+* The Rust SQL Toolkit. An async, pure Rust SQL crate featuring compile-time checked queries without a DSL. Supports PostgreSQL, MySQL, and SQLite.
+#### Network
+* [reqwest](https://crates.io/crates/reqwest)
+    * An ergonomic, batteries-included HTTP Client for Rust.
+* [http](https://crates.io/crates/http)
+    * A general purpose library of common HTTP types
+#### Web
+[actix-web](actix-web)
+* Actix Web is a powerful, pragmatic, and extremely fast web framework for Rust
 #### Personal rust project
 [fospring project](https://github.com/fospring/feature_workspace)
 
