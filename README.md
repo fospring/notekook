@@ -30,7 +30,10 @@ recode some tips in learning
             * [sqlite](#sqlite)
             * [sqlx](#sqlx)
         * [NetWork](#Network)
+            * [request](#request)
+            * [http](#http)
         * [Web](#Web)
+            * [active-web](#active-web)
     * [Golang](#Golang)
 * [Computer System](#Computer-System)
     * [System call](#System-call)
@@ -266,11 +269,14 @@ This library provides anyhow::Error, a trait object based error type for easy id
 [sqlx](https://crates.io/crates/sqlx)
 * The Rust SQL Toolkit. An async, pure Rust SQL crate featuring compile-time checked queries without a DSL. Supports PostgreSQL, MySQL, and SQLite.
 #### Network
+##### request
 * [reqwest](https://crates.io/crates/reqwest)
     * An ergonomic, batteries-included HTTP Client for Rust.
+##### http
 * [http](https://crates.io/crates/http)
     * A general purpose library of common HTTP types
 #### Web
+##### active-web
 [actix-web](actix-web)
 * Actix Web is a powerful, pragmatic, and extremely fast web framework for Rust
 #### Personal rust project
