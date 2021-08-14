@@ -34,6 +34,7 @@ recode some tips in learning
             * [http](#http)
         * [Web](#Web)
             * [active-web](#active-web)
+            * [axum](#axum)
     * [Golang](#Golang)
 * [Computer System](#Computer-System)
     * [System call](#System-call)
@@ -277,8 +278,11 @@ This library provides anyhow::Error, a trait object based error type for easy id
     * A general purpose library of common HTTP types
 #### Web
 ##### active-web
-[actix-web](actix-web)
+[actix-web](https://crates.io/crates/actix-web)
 * Actix Web is a powerful, pragmatic, and extremely fast web framework for Rust
+##### axum
+[axum](https://crates.io/crates/axum)
+* Web framework that focuses on ergonomics and modularity
 #### Personal rust project
 [fospring project](https://github.com/fospring/feature_workspace)
 
