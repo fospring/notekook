@@ -45,6 +45,7 @@ recode some tips in learning
 * [Block chain](#Block-chain)
     * [Consensus](#Consensus)
     * [Contract](#Contract)
+        * [WebAssembly](#WebAssembly)
     * [Virtual Machine](#Virtual-Machine)
     * [Transaction](#Transaction)
     * [Storage](#Storage)
@@ -483,7 +484,10 @@ This library provides anyhow::Error, a trait object based error type for easy id
     * Stake and Voting for “witnesses” and “delegates”
     * select Some Fixed Num of witnesses to update ledger. 
 ### Contract
-#### Wasm
+#### WebAssembly
+* WebAssembly (abbreviated Wasm) is a binary instruction format for a stack-based virtual machine. Wasm is designed as a portable compilation target for programming languages, enabling deployment on the web for client and server applications.
+* [official website](https://webassembly.org/)
+* [my contract examples](https://github.com/fospring/bithumb-chain-rust-cdt2/tree/master/examples)
 #### Solidity
 * EVM(Ethereum Virtual Machine)
     * EVM is the runtime environment for smart contracts in Ethereum.It's not only sandboed but actually completed isolated,which means that code running inside the EVM has no access to network,filesystem or other process.Smart contracts event have limited access to other smart contract.
