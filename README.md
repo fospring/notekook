@@ -3,7 +3,7 @@
 recode some tips in learning
 * [Code Language](#Code-Language)
     * [Rust](#Rust)
-        * [rustlang official](#rustlang-official)
+        * [Docs](#Docs)
         * [Types](#Types)
             * [Rc](#Rc)
             * [Arc](#Arc)
@@ -57,20 +57,28 @@ recode some tips in learning
 * [Makefile](#Makefile)
 ## Code Language
 ### Rust
-* [rustlang official](https://www.rust-lang.org/)
-* Why rust
+* Why choice rust
     * Performance:
         * Rust is blazingly fast and memory-efficient: with no runtime or garbage collector, it can power performance-critical services, run on embedded devices, and easily integrate with other languages.
     * Reliability:
         * Rust’s rich type system and ownership model guarantee memory-safety and thread-safety — enabling you to eliminate many classes of bugs at compile-time.
     * Productivity:
         * Rust has great documentation, a friendly compiler with useful error messages, and top-notch tooling — an integrated package manager and build tool, smart multi-editor support with auto-completion and type inspections, an auto-formatter, and more.
-* What's the advantages of Rust 
+* Advantages of Rust 
     * RAII
     * ownership
     * borrow check
     * thread safety
     * Zero Cost Abstractions
+#### Docs
+* [Rustlang official](https://www.rust-lang.org/)
+* The Rust Programming Language
+    * [En-Us](https://doc.rust-lang.org/book/)
+    * [Zh-Cn](https://kaisery.github.io/trpl-zh-cn/)
+* [macros book](https://danielkeep.github.io/tlborm/book/README.html)
+* Protobuf
+    * [protobuf guide](https://colobu.com/2015/01/07/Protobuf-language-guide/)
+    * [Rust Protocol Buffers](https://juejin.cn/post/6844903878480117767)
 #### Types
 ##### Rc
 * Rc
