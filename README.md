@@ -59,6 +59,7 @@ Record some tips when learning or thinking.
 * [Database](#Database)
 * [Shell Script](#Shell-Script)
 * [Makefile](#Makefile)
+* [Reading notes](#Reading-notes)
 * [Miscellaneous(杂项)](#Miscellaneous)
 ## Code Language
 ### Rust
@@ -590,6 +591,9 @@ This library provides anyhow::Error, a trait object based error type for easy id
 
 ## Makefile
 [makefiletutorial](https://makefiletutorial.com/)
+
+## Reading notes
+- [Code Complete(代码大全)](docs/reading_notes/code_complete.md)
 
 ## Miscellaneous
 - [如何制作文本形式的目录树](https://www.zhihu.com/question/28823974)
