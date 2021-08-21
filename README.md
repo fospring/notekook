@@ -1,6 +1,8 @@
 # notekook
 ## Introduction
-recode some tips in learning
+
+Record some tips when learning or thinking.
+
 * [Code Language](#Code-Language)
     * [Rust](#Rust)
         * [Docs](#Docs)
@@ -37,6 +39,8 @@ recode some tips in learning
             * [active-web](#active-web)
             * [axum](#axum)
     * [Golang](#Golang)
+    * [JavaScript](#JavaScript)
+        * [Docs](#JsDocs)
 * [Computer System](#Computer-System)
     * [System call](#System-call)
     * [Synchronous](#Synchronous-between-multiple-thread)
@@ -55,6 +59,7 @@ recode some tips in learning
 * [Database](#Database)
 * [Shell Script](#Shell-Script)
 * [Makefile](#Makefile)
+* [Miscellaneous(杂项)](#Miscellaneous)
 ## Code Language
 ### Rust
 * Why choice rust
@@ -417,6 +422,10 @@ This library provides anyhow::Error, a trait object based error type for easy id
  * race detector
     * 10 times cpu consumption
 
+### JavaScript
+#### JsDocs 
+* Protobuf
+    * [JavaScript protocol buffers](https://www.npmjs.com/package/protocol-buffers-schema)
 ## Computer System
 ### System call
 ### Synchronous between multiple thread
@@ -581,3 +590,7 @@ This library provides anyhow::Error, a trait object based error type for easy id
 
 ## Makefile
 [makefiletutorial](https://makefiletutorial.com/)
+
+## Miscellaneous
+- [如何制作文本形式的目录树](https://www.zhihu.com/question/28823974)
+    - 使用tree命令
