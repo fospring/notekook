@@ -85,6 +85,7 @@ Record some tips when learning or thinking.
 * Protobuf
     * [protobuf guide](https://colobu.com/2015/01/07/Protobuf-language-guide/)
     * [Rust Protocol Buffers](https://juejin.cn/post/6844903878480117767)
+* [Rust Design Patterns](https://rust-unofficial.github.io/patterns/intro.html)
 #### Types
 ##### Rc
 * Rc
