@@ -598,7 +598,11 @@ This library provides anyhow::Error, a trait object based error type for easy id
 [makefiletutorial](https://makefiletutorial.com/)
 
 ## Reading notes
+### Computer Science
 - [Code Complete(代码大全)](docs/reading_notes/code_complete.md)
+- [The Art of Readable Code](docs/reading_notes/the_art_of_readable_code.md)
+
+### psychology
 - [Motivation and Personality(动机与人格)](docs/reading_notes/motivation_and_personality.md)
 
 ## Miscellaneous
