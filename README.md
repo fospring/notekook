@@ -57,6 +57,7 @@ Record some tips when learning or thinking.
     * [Network](#Network)
     * [Cryptography](#Cryptography)
 * [Database](#Database)
+    * [SQLite](#SQLiteDB)
 * [Shell Script](#Shell-Script)
 * [Makefile](#Makefile)
 * [Reading notes](#Reading-notes)
@@ -582,12 +583,15 @@ This library provides anyhow::Error, a trait object based error type for easy id
 #### Socket
 * Socket
 * WebSocket
-    * 
 
 ### Cryptography
 * Zero-knowledge proof 
 
 ## Database
+### SQLiteDB
+- [SQLite](https://www.sqlite.org/docs.html)
+- [SQLCipher](https://blog.csdn.net/androidstar_cn/article/details/52834064)
+
 ## Shell Script
 
 ## Makefile
