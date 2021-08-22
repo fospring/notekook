@@ -15,6 +15,7 @@ Record some tips when learning or thinking.
             * [trait](#trait)
                 * [Send](#Send)
                 * [Sync](#Sync)
+        * [Memory](#Memory)
         * [Async rust](#Async-rust)
             * [Async vs other concurrency models](#Async-vs-other-concurrency-models)
             * [The State of Async rust](#The-state-of-async-rust)
@@ -222,6 +223,10 @@ std::pin::Pin
 * std::pin::Unpin
     * Types that can be safely moved after being pinned.
     * can move by safe rust
+
+### Memory
+- [memory allocate and deallocate](https://doc.rust-lang.org/std/alloc/fn.alloc.html)
+
 ### Async-rust
 #### Async vs other concurrency models
 *  In summary, asynchronous programming allows highly performant implementations that are suitable for low-level languages like Rust, while providing most of the ergonomic benefits of threads and coroutines:
