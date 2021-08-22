@@ -599,6 +599,7 @@ This library provides anyhow::Error, a trait object based error type for easy id
 
 ## Reading notes
 - [Code Complete(代码大全)](docs/reading_notes/code_complete.md)
+- [Motivation and Personality(动机与人格)](docs/reading_notes/motivation_and_personality.md)
 
 ## Miscellaneous
 - [如何制作文本形式的目录树](https://www.zhihu.com/question/28823974)

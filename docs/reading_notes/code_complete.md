@@ -1,4 +1,5 @@
 # 《Code Complete》 Reading Notes
+- Author: Steve McConnel
 
 《代码大全(第二版)》读书笔记
 
