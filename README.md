@@ -604,3 +604,4 @@ This library provides anyhow::Error, a trait object based error type for easy id
 ## Miscellaneous
 - [如何制作文本形式的目录树](https://www.zhihu.com/question/28823974)
     - 使用tree命令
+- [install oh-my-zsh](docs/miscellaneous/install_oh-my-zsh.md)
