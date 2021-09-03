@@ -39,6 +39,10 @@ Record some tips when learning or thinking.
         * [Web](#Web)
             * [active-web](#active-web)
             * [axum](#axum)
+        * [Cargo tools](#Cargo-tools)
+            * [cargo fmt](#cargo-fmt)
+            * [cargo clippy](#cargo-clippy)
+            * [cargo expand](#cargo-expand)
     * [Golang](#Golang)
     * [JavaScript](#JavaScript)
         * [Docs](#JsDocs)
@@ -313,6 +317,24 @@ This library provides anyhow::Error, a trait object based error type for easy id
 ##### axum
 [axum](https://crates.io/crates/axum)
 * Web framework that focuses on ergonomics and modularity
+#### Cargo tools
+##### cargo fmt
+##### cargo clippy
+##### cargo expand
+  - [cargo expand](https://github.com/dtolnay/cargo-expand)
+    - 功能：宏展开
+    - 安装
+    ```shell script
+    cargo install cargo-expand
+    ```
+    - 查看工作空间中crate宏展开
+    ```shell script
+    cargo build -p package-name
+    ```
+    - 查看模块或函数宏展开
+    ```shell script
+    cargo expand path::to::module
+    ```
 #### Personal rust project
 [fospring project](https://github.com/fospring/feature_workspace)
 
