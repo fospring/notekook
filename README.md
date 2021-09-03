@@ -46,6 +46,7 @@ Record some tips when learning or thinking.
             * [cargo fmt](#cargo-fmt)
             * [cargo clippy](#cargo-clippy)
             * [cargo expand](#cargo-expand)
+        * [Build scripts](#Build scripts)
     * [Golang](#Golang)
     * [JavaScript](#JavaScript)
         * [Docs](#JsDocs)
@@ -347,6 +348,8 @@ This library provides anyhow::Error, a trait object based error type for easy id
     ```shell script
     cargo expand path::to::module
     ```
+#### Build scripts
+- [Build Scripts](https://doc.rust-lang.org/cargo/reference/build-scripts.html)
 #### Personal rust project
 [fospring project](https://github.com/fospring/feature_workspace)
 
