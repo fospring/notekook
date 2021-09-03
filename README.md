@@ -10,6 +10,8 @@ Record some tips when learning or thinking.
             * [Rc](#Rc)
             * [Arc](#Arc)
             * [Mutex](#Mutex)
+            * [Ord](#Ord)
+            * [Duration](#Duration)
             * [channel](#channel)
             * [traitObj](#traitObj)
             * [trait](#trait)
@@ -155,7 +157,15 @@ Record some tips when learning or thinking.
         * `recv` will block until a message is available.
         * `try_recv` Attempts to return a pending value on this receiver without blocking.
 * Atomic data types 
-    * 
+##### Ord
+- [Ord](https://doc.rust-lang.org/std/cmp/trait.Ord.html)
+- Trait for types that form a total order
+- 用于排序和比较
+##### Duration
+- [Duration](https://doc.rust-lang.org/std/time/struct.Duration.html)
+- A Duration type to represent a span of time, typically used for system timeouts.
+- 用于表示时间间隔
+  
 ##### traitObj
 * The representation of a trait object like &dyn SomeTrait.
 
