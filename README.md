@@ -42,11 +42,14 @@ Record some tips when learning or thinking.
         * [Web](#Web)
             * [active-web](#active-web)
             * [axum](#axum)
+        * [Websocket](#Websocket)
         * [Cargo tools](#Cargo-tools)
             * [cargo fmt](#cargo-fmt)
             * [cargo clippy](#cargo-clippy)
             * [cargo expand](#cargo-expand)
         * [Build scripts](#Build scripts)
+        * [Rust Style](Rust-Style)
+        * [Log](#Log)
     * [Golang](#Golang)
     * [JavaScript](#JavaScript)
         * [Docs](#JsDocs)
@@ -97,6 +100,7 @@ Record some tips when learning or thinking.
     * [Rust Protocol Buffers](https://juejin.cn/post/6844903878480117767)
 * [Rust Design Patterns](https://rust-unofficial.github.io/patterns/intro.html)
 * [The Rust Reference](https://doc.rust-lang.org/reference/introduction.html)
+* [Cargo Book](https://doc.rust-lang.org/cargo/commands/cargo-rustc.html)
 #### Types
 ##### Rc
 * Rc
@@ -330,6 +334,9 @@ This library provides anyhow::Error, a trait object based error type for easy id
 ##### axum
 [axum](https://crates.io/crates/axum)
 * Web framework that focuses on ergonomics and modularity
+#### Websocket
+* [websocket](https://docs.rs/websocket/0.26.2/websocket/)
+    * Rust-WebSocket is a WebSocket (RFC6455) library written in Rust.
 #### Cargo tools
 ##### cargo fmt
 ##### cargo clippy
@@ -350,6 +357,14 @@ This library provides anyhow::Error, a trait object based error type for easy id
     ```
 #### Build scripts
 - [Build Scripts](https://doc.rust-lang.org/cargo/reference/build-scripts.html)
+#### Rust Style
+* [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
+* [rfcs/style-guide](https://github.com/rust-lang/rfcs/tree/master/style-guide)
+* [PingCAP Style Guide](https://pingcap.github.io/style-guide/rust/)
+#### Log
+- compress:
+  - [flate2](https://crates.io/crates/flate2)
+  - [tar](https://crates.io/crates/tar)
 #### Personal rust project
 [fospring project](https://github.com/fospring/feature_workspace)
 
