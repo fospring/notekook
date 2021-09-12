@@ -47,9 +47,10 @@ Record some tips when learning or thinking.
             * [cargo fmt](#cargo-fmt)
             * [cargo clippy](#cargo-clippy)
             * [cargo expand](#cargo-expand)
-        * [Build scripts](#Build scripts)
+        * [Build scripts](#Build-scripts)
         * [Rust Style](Rust-Style)
         * [Log](#Log)
+        * [Debug](#Debug)
     * [Golang](#Golang)
     * [JavaScript](#JavaScript)
         * [Docs](#JsDocs)
@@ -137,7 +138,7 @@ Record some tips when learning or thinking.
           }
       }
   }
-    ```
+  ```
 ##### Arc
 * A thread-safe reference-counting pointer. ‘Arc’ stands for ‘Atomically Reference Counted’.
 ##### Mutex
@@ -150,7 +151,7 @@ Record some tips when learning or thinking.
     * Signature
     ```rust
   pub fn channel<T>() -> (Sender<T>, Receiver<T>)
-    ```
+  ```
     * Two haves are returned
         * The first of which is a `Sender` handle,used to signal the end of a computation and provide its value.
         * The second half is a `Receiver` which implements the `Future` trait, resolving to the value that was given to the `Sender` handle.
@@ -365,6 +366,9 @@ This library provides anyhow::Error, a trait object based error type for easy id
 - compress:
   - [flate2](https://crates.io/crates/flate2)
   - [tar](https://crates.io/crates/tar)
+##### Debug
+- [vscode](./docs/rust/debug/vscode.md)
+
 #### Personal rust project
 [fospring project](https://github.com/fospring/feature_workspace)
 
@@ -526,7 +530,7 @@ This library provides anyhow::Error, a trait object based error type for easy id
     * Practical Byzantine Fault Tolerance
     * [three-phase protocol](http://pmg.csail.mit.edu/papers/osdi99.pdf)
     * Figure 1展示了非主节点故障的操作。0号是主节点，3号是故障节点，C是客户端。
-    ![pbft-三阶段](./resources/blockchain/consensus/three-phrase.png)
+      ![pbft-三阶段](./resources/blockchain/consensus/three-phrase.png)
         * 三阶段消息：pre-prepare、prepare、commit，每个消息都会签名，证明消息的发送者及消息的类型
         * pre-preparex消息由主节点发出，包括：
             * 当前请求view：v
@@ -562,7 +566,7 @@ This library provides anyhow::Error, a trait object based error type for easy id
         * committed意味着有f+1个费拜占庭节点可以执行请求，而committed-local意味着，副本i看到了有f+1个拜占庭节点可以执行请求，f+1个非拜占庭节点执行请求，就达成了让费拜占庭节点一致
     * PBFT中节点存在拜占庭节点，主节点并不是可信的，不能依赖主节点统计是否有f+1个费拜占庭节点达成了prepared，而是每个节点各自统计，commited-local让节点看到了，系统一定可以达成一致，采取执行请求
     * PBFT解决的是在拜占庭环境下，如何提供一致性，以及如何持续的提供一致性的问题
-                
+    
 * POS
 * DPOS
     * Delegated Proof of Stake
