@@ -71,6 +71,7 @@ Record some tips when learning or thinking.
     * [Cryptography](#Cryptography)
 * [Database](#Database)
     * [SQLite](#SQLiteDB)
+* [Compilers](#Compilers)
 * [Shell Script](#Shell-Script)
 * [Makefile](#Makefile)
 * [Reading notes](#Reading-notes)
@@ -653,6 +654,13 @@ This library provides anyhow::Error, a trait object based error type for easy id
 ### SQLiteDB
 - [SQLite](https://www.sqlite.org/docs.html)
 - [SQLCipher](https://blog.csdn.net/androidstar_cn/article/details/52834064)
+
+## Compilers
+* About Compile Project
+### Books
+* [编译原理(龙书第二版-中文)](https://github.com/fospring/book-2/blob/master/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86(%E9%BE%99%E4%B9%A6)%20%E7%AC%AC%E4%BA%8C%E7%89%88.pdf)
+### 词法分析
+* token：一个token就是一个语法的类型，譬如自然语言中，有名词、动词、形容词等；对于编程语言而言，就是标识符、整型、关键字等。
 
 ## Shell Script
 
