@@ -57,6 +57,8 @@ Record some tips when learning or thinking.
 * [Computer System](#Computer-System)
     * [System call](#System-call)
     * [Synchronous](#Synchronous-between-multiple-thread)
+    * [IPC](#IPC)
+      * [Share Memory](#Share-Memory)
 * [Design Pattern](#Design-Pattern)
     * [Object-oriented programming design patterns](#GoF's-Object-oriented-programming-design-patterns)
     * [Concurrent programming design pattern](#Concurrent-programming-design-pattern)
@@ -505,6 +507,33 @@ This library provides anyhow::Error, a trait object based error type for easy id
         
     * use atomic types
         * lock free, no trigger schedule
+### IPC
+* [程间通信(IPC, Inter-Process Communication)](https://zh.wikipedia.org/wiki/%E8%A1%8C%E7%A8%8B%E9%96%93%E9%80%9A%E8%A8%8A)
+  * 指至少两个进程或线程间传送数目或信号的一些技术活方法。
+* 使用IPC的理由
+  * 信息共享：Web服务器，通过网页浏览器使用进程间通信来共享web文件（网页等）和多媒体
+  * 加速：维基百科使用进程间通信进行交流的多服务器来满足用户的请求
+  * 模块化
+  * 私有权分离
+* 主要的IPC方法
+
+|方法|提供方(操作系统或其他环境)|
+|---|---|
+|文件|多数操作系统|
+|信号|多数操作系统|
+|Berkeley套接字|多数操作系统|
+|消息队列|多数操作系统|
+|管道|所有的 POSIX 系统, Windows.|
+|命名管道|所有的 POSIX 系统, Windows.|
+|信号量|所有的 POSIX 系统, Windows.|
+|共享内存|所有的 POSIX 系统, Windows.|
+|消息传递|用于MPI规范，Java RMI，CORBA，MSMQ，MailSlot以及其他.|
+|内存映射文件|所有的 POSIX 系统, Windows.|
+
+#### Share Memory
+* 在软件中，[共享内存](https://zh.wikipedia.org/wiki/%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98)指可被多个进程存取的内存，一个进程是一段程序的单个运行实例。在这种情况下，共享内存被用作进程间的通讯。
+* [共享内存](https://zhuanlan.zhihu.com/p/37808566)
+* [实践](https://github.com/hiberabyss/JustDoIt/tree/master/ShareMemory)
 
 ## Design Pattern
 ### GoF's Object-oriented programming design patterns
